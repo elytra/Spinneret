@@ -62,7 +62,7 @@ if [ ! -e "$tmp" -o -z "$(cat $tmp)" ]; then
 fi
 
 # jq is magical
-jq -r '.packages | map(select(.name != "'$pack_name'")) | .[length] = {title:"'$pack_display_name'",name:"'$pack_name'",version:"'$version'",location:"'$pack_name'.json",priority:1} | {minimumVersion:1,packages:.}' "$tmp" > upload/instances.json
+jq -r '.packages | map(select(.name != "'"$pack_name"'")) | .[length] = {title:"'"$pack_display_name"'",name:"'"$pack_name"'",version:"'$version'",location:"'"$pack_name"'.json",priority:1} | {minimumVersion:1,packages:.}' "$tmp" > upload/instances.json
 
 # this trailing slash is VERY IMPORTANT
 rsync -r upload/ "$target"
