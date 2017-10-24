@@ -22,8 +22,8 @@ mkdir skcraft-modpack
 cp -r modpack/minecraft skcraft-modpack/src
 mkdir skcraft-modpack/loaders
 
-mc_version=`jq -r '.minecraft.version' modpack/manifest.json`
-forge_version=`jq -r '.minecraft|"\(.version)-\(.modLoaders[0].id[6:])"' modpack/manifest.json`
+mc_version=`grep 'IntendedVersion' modpack/instance.cfg  |cut -d= -f 2`
+forge_version="$mc_version-`grep 'The Forge version you need is ' cmpdl.log |cut -d ' ' -f 7`"
 
 curl -L https://files.minecraftforge.net/maven/net/minecraftforge/forge/$forge_version/forge-$forge_version-installer.jar -o skcraft-modpack/loaders/forge-$forge_version-installer.jar
 
