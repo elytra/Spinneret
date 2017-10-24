@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 mapfile=/tmp/$RANDOM$RANDOM
 jq --raw-output '.[]|.[]|"\(.modid) \(.filename)"' modalyzer.json > $mapfile
 for i in "$@"; do
