@@ -1,4 +1,4 @@
 #!/bin/bash
 mkdir out
-cd modpack/minecraft
+cd modpack/src
 zip -r9 ../../out/$JOB_BASE_NAME.zip *

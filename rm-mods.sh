@@ -5,9 +5,10 @@ for i in "$@"; do
 	files=`grep "^$i " $mapfile | cut -d ' ' -f 2-`
 	if [ -n "$files" ]; then
 		for f in $files; do
-			rm -v modpack/minecraft/mods/$f
+			rm -fv modpack/src/mods/$f modpack/src/mods/*/$f
 		done
 	else
 		echo no mod with id $i in this modpack, skipping
 	fi
 done
+rm $mapfile

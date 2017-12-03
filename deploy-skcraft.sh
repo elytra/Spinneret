@@ -1,12 +1,13 @@
 #!/bin/bash -e
-if [ -z "$3" ]; then
-	echo 'must specify pack name, pack display name, and target path (with optional version)'
+if [ -z "$4" ]; then
+	echo 'must specify pack name, pack display name, target path, and mc version (with optional pack version)'
 	exit 1
 fi
 pack_name="$1"
 pack_display_name="$2"
 target="$3"
-version="$4"
+mc_version="$4"
+version="$5"
 if [ -z "$version" ]; then
 	if [ -n "$BUILD_NUMBER" ]; then
 		echo Using Jenkins build number for pack version
@@ -19,13 +20,8 @@ fi
 
 rm -rf skcraft-modpack upload
 mkdir skcraft-modpack
-cp -r modpack/minecraft skcraft-modpack/src
-mkdir skcraft-modpack/loaders
-
-mc_version=`grep 'IntendedVersion' modpack/instance.cfg  |cut -d= -f 2`
-forge_version="$mc_version-`grep 'The Forge version you need is ' cmpdl.log |cut -d ' ' -f 7`"
-
-curl -L https://files.minecraftforge.net/maven/net/minecraftforge/forge/$forge_version/forge-$forge_version-installer.jar -o skcraft-modpack/loaders/forge-$forge_version-installer.jar
+cp -r modpack/src skcraft-modpack/src
+cp -r modpack/loaders skcraft-modpack/loaders
 
 cat > skcraft-modpack/modpack.json <<EOF
 {
