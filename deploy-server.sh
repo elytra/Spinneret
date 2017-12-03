@@ -21,13 +21,3 @@ unlink server.jar || :
 ln -s forge-*-universal.jar server.jar
 rm -f mods/mod_list.json
 echo 'eula=true' > eula.txt
-cat > server.sh <<'EOF'
-#!/bin/bash
-function rmpid() {
-	rm server.pid
-}
-trap rmpid EXIT
-java -Xms2G -Xmx2G -jar server.jar nogui "$@" &
-echo $! > server.pid
-wait
-EOF
