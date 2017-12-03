@@ -114,6 +114,10 @@ class StatusPing:
 
 ping = StatusPing(sys.argv[1], int(sys.argv[2]))
 while True:
-	if ping.get_status()['players']['online'] == 0:
+	try:
+		if ping.get_status()['players']['online'] == 0:
+			break
+	except ConnectionRefusedError:
+		# this is a success condition, actually, so break
 		break
 	time.sleep(5)
