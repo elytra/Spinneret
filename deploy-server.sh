@@ -16,8 +16,8 @@ cd "$1"
 rm -f minecraft_server*.jar
 rm -f forge-*-universal.jar
 java -jar "$installer" -installServer
-rm forge-*.log
-unlink server.jar
+rm -f forge-*.log
+unlink server.jar || :
 ln -s forge-*-universal.jar server.jar
 rm -f mods/mod_list.json
 echo 'eula=true' > eula.txt
