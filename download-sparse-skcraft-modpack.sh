@@ -5,4 +5,4 @@ cd modpack
 git submodule update --init --recursive
 chmod +x prepare.sh
 ./prepare.sh
-find ./ -name '*.url.txt' -delete
+#find ./ -name '*.url.txt' -delete
